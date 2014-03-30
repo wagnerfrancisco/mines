@@ -1,0 +1,14 @@
+{
+  "name": "mines",
+  "version": "0.0.1",
+  "description": "Mines",
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-jasmine": "0.6.3",
+    "underscore": "1.6.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.6.1"
+  }
+}
