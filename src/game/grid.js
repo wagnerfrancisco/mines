@@ -34,6 +34,42 @@ mines.grid = function(specs) {
           });
        },
 
+       getFieldPosition = function(field) {
+          var i, j;
+
+          for (i = 0; i < that.length; i++) {
+             for (j = 0; j < that[i].length; j++) {
+                if (that[i][j] === field) {
+                   return {
+                      i: i,
+                      j: j
+                   };
+                }
+             }
+          }
+       },
+
+       expandZeroIndicators = function(position) {
+          var field = that[position.i] && that[position.i][position.j];
+
+          if (!field ||
+              !field.isZeroIndicator() ||
+              field.isTurned()) {
+             return;
+          }
+
+          field.turn();
+          
+          for (var i = position.i - 1; i <= position.i + 1; i++) {
+             for (var j = position.j - 1; j <= position.j + 1; j++) {
+                expandZeroIndicators({
+                   i: i,
+                   j: j
+                });
+             }
+          }
+       },
+
        initialize = function() {
          if (specs.columns && specs.rows) {
             buildFromSpecs();
@@ -59,6 +95,21 @@ mines.grid = function(specs) {
                that[p][q].increaseValue();
             }
          }
+      }
+   };
+
+   that.fieldsNum = function() {
+      return that.length * that[0].length;
+   };
+
+   that.turnField = function(field) {
+      var fieldPosition;
+
+      if (field.isZeroIndicator()) {
+         fieldPosition = getFieldPosition(field);
+         expandZeroIndicators(fieldPosition);
+      } else {
+         field.turn();  
       }
    };
 

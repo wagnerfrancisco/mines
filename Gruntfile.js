@@ -5,9 +5,9 @@ module.exports = function(grunt) {
 
     jasmine: {
       pivotal: {
-        src: 'src/**/*.js',
+        src: 'src/game/*.js',
         options: {
-          vendor: 'node_modules/underscore/underscore.js',
+          vendor: ['node_modules/underscore/underscore.js', 'node_modules/jquery/dist/jquery.js'],
           specs: 'spec/*Spec.js'
         }
       }

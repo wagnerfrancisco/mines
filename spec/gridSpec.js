@@ -9,6 +9,7 @@ describe('grid', function() {
 
          expect(g.length).toBe(2);
          expect(g[0].length).toBe(3);
+         expect(g.fieldsNum()).toBe(6);
       });
 
       it('should build grid according to the specs', function() {
@@ -36,6 +37,26 @@ describe('grid', function() {
          });
 
          expect(g.toString()).toBe('0 0 0\n0 0 0');
+         expect(g.fieldsNum()).toBe(6);
+      });
+   });
+
+   describe('number of fields', function() {
+      it('should return the number of fields - grid from string', function() {
+         var g = mines.grid({
+            fromString: '1 B 1\n1 1 1'
+         });
+
+         expect(g.fieldsNum()).toBe(6);
+      });
+
+      it('should return the number of fields - grid from specs', function() {
+         var g = mines.grid({
+            rows: 3,
+            columns: 3
+         });
+
+         expect(g.fieldsNum()).toBe(9);
       });
    });
 
@@ -65,5 +86,44 @@ describe('grid', function() {
          grid.increaseIndicatorsAround(2, 2);
          expect(grid.toString()).toEqual(expected);
       });
-   });  
+   });
+
+   describe('field turning', function() {
+      var grid;
+
+      beforeEach(function() {
+         grid = mines.grid({
+            fromString: 'B 2 0 0\n' +
+                        'B 2 0 0\n' +
+                        '1 1 0 0\n'
+         });
+      });
+
+      it('should initialize all fields unturned', function() {
+         _.each(grid, function(row) {
+            _.each(row, function(field) {
+               expect(field.isTurned()).toBe(false);
+            });
+         });
+      });
+
+      it('should turn field', function() {
+         var field = grid[0][1];
+         
+         grid.turnField(field);
+         expect(field.isTurned()).toBe(true);
+      });
+
+      it('should expand all 0 indicators when clicking on a 0 indicator', function() {
+         var field = grid[0][2];
+         
+         grid.turnField(field);
+         expect(grid[0][2].isTurned()).toBe(true);
+         expect(grid[0][3].isTurned()).toBe(true);
+         expect(grid[1][2].isTurned()).toBe(true);
+         expect(grid[1][3].isTurned()).toBe(true);
+         expect(grid[2][2].isTurned()).toBe(true);
+         expect(grid[2][3].isTurned()).toBe(true);
+      });
+   });
 });
