@@ -36,7 +36,7 @@ $(function() {
              var tr = $('<tr>');
              
              _.each(row, function(column) {
-                var td = $('<td>').text(column);
+                var td = $('<td>').text(column == '0' ? ' ' : column);
                 td.click(fieldClickHandler(column));
                 tr.append(td);
              });
