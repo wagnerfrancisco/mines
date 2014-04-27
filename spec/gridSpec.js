@@ -140,5 +140,16 @@ describe('grid', function() {
          expect(grid[2][2].isTurned()).toBe(true);
          expect(grid[2][3].isTurned()).toBe(true);
       });
+
+      it('should turn all bombs when game is over', function() {
+         var field = grid[1][0];
+
+         expect(function() {
+            grid.turnField(field);
+         }).toThrow();
+
+         expect(grid[0][0].isTurned()).toBe(true);
+         expect(grid[1][0].isTurned()).toBe(true);
+      });
    });
 });

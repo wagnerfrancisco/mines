@@ -83,6 +83,29 @@ mines.grid = function(specs) {
           }          
        },
 
+       turnBomb = function(field) {
+          try {
+             field.turn();
+          } catch(e) {
+             if (e !== 'BOMB_EXPLODED') {
+                throw e;
+             }
+          }
+       },
+
+       turnAllBombs = function() {
+          var currentField;
+
+          for (var i = 0; i < that.length; i++) {
+             for (var j = 0; j < that[i].length; j++) {
+                currentField = that[i] && that[i][j];
+                if (currentField && currentField.isBomb()) {
+                    turnBomb(currentField);
+                }
+             }
+          }
+       },
+
        initialize = function() {
          if (specs.columns && specs.rows) {
             buildFromSpecs();
@@ -120,18 +143,18 @@ mines.grid = function(specs) {
          return;
       }
 
-      field.turn();
+      try {
+         field.turn();
 
-      if (field.isZeroIndicator()) {
-         expandFieldsAround(getFieldPosition(field));
-      }
-
-      // if (field.isZeroIndicator()) {
-      //    fieldPosition = getFieldPosition(field);
-      //    expandZeroIndicators(fieldPosition);
-      // } else {
-      //    field.turn();  
-      // }
+         if (field.isZeroIndicator()) {
+            expandFieldsAround(getFieldPosition(field));
+         }
+      } catch(e) {
+         if (e === 'BOMB_EXPLODED') {
+            turnAllBombs();
+         }
+         throw e;
+      }      
    };
 
    that.toString = function() {

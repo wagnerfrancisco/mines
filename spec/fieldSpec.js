@@ -48,7 +48,7 @@ describe('field', function() {
       expect(f.value()).toBe(2);
    });
 
-   it('should turn the card', function() {
+   it('should turn the unturned card', function() {
       var f = mines.field();
       expect(f.isTurned()).toBe(false);
 
@@ -56,7 +56,7 @@ describe('field', function() {
       expect(f.isTurned()).toBe(true);
 
       f.turn();
-      expect(f.isTurned()).toBe(false);
+      expect(f.isTurned()).toBe(true);
    });
 
    it('should throw gameOver when turning a bomb field', function() {
