@@ -1,3 +1,8 @@
+#game {
+   text-align: center;
+   margin: 0 auto;
+}
+
 #game td {
    font-size: 0px;
    border: 1px solid #AAA;
@@ -10,4 +15,26 @@
    font-size: 14px;
    text-align: center;
    background-color: #EEE;
+}
+
+#game .status {
+   position: relative;
+   height: 30px;
+}
+
+#game .status .smiley {
+   position: absolute;
+   left: 50%;
+   margin-left: -13px;
+   width: 26px;
+   height: 26px;
+   background-image: url('assets/smile.gif');
+}
+
+#game .status .smiley.pressed {
+   background-image: url('assets/shock.gif');
+}
+
+#game .status .smiley.gameover {
+   background-image: url('assets/dead.gif');
 }

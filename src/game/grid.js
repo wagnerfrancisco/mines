@@ -70,6 +70,19 @@ mines.grid = function(specs) {
           }
        },
 
+       expandFieldsAround = function(position) {
+          var currentField;
+
+          for (var i = position.i - 1; i <= position.i + 1; i++) {
+             for (var j = position.j - 1; j <= position.j + 1; j++) {
+                currentField = that[i] && that[i][j];
+                if (currentField) {
+                   that.turnField(currentField);
+                }
+             }
+          }          
+       },
+
        initialize = function() {
          if (specs.columns && specs.rows) {
             buildFromSpecs();
@@ -103,14 +116,22 @@ mines.grid = function(specs) {
    };
 
    that.turnField = function(field) {
-      var fieldPosition;
+      if (field.isTurned()) {
+         return;
+      }
+
+      field.turn();
 
       if (field.isZeroIndicator()) {
-         fieldPosition = getFieldPosition(field);
-         expandZeroIndicators(fieldPosition);
-      } else {
-         field.turn();  
+         expandFieldsAround(getFieldPosition(field));
       }
+
+      // if (field.isZeroIndicator()) {
+      //    fieldPosition = getFieldPosition(field);
+      //    expandZeroIndicators(fieldPosition);
+      // } else {
+      //    field.turn();  
+      // }
    };
 
    that.toString = function() {

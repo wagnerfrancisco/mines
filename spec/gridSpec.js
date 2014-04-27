@@ -114,6 +114,21 @@ describe('grid', function() {
          expect(field.isTurned()).toBe(true);
       });
 
+      it('should expand all fields around a zero indicator', function() {
+         var field = grid[1][2];
+
+         grid.turnField(field);
+         expect(grid[0][1].isTurned()).toBe(true);
+         expect(grid[0][2].isTurned()).toBe(true);
+         expect(grid[0][3].isTurned()).toBe(true);
+         expect(grid[1][1].isTurned()).toBe(true);
+         expect(grid[1][2].isTurned()).toBe(true);
+         expect(grid[1][3].isTurned()).toBe(true);
+         expect(grid[2][1].isTurned()).toBe(true);
+         expect(grid[2][2].isTurned()).toBe(true);
+         expect(grid[2][3].isTurned()).toBe(true);
+      });
+
       it('should expand all 0 indicators when clicking on a 0 indicator', function() {
          var field = grid[0][2];
          

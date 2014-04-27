@@ -25,7 +25,27 @@ $(function() {
           return function(e) {
              game.turnField(field);
              reRender();
+             updateSmiley();
           };
+       },
+
+       updateSmiley = function() {
+          var smiley = $('.smiley', gameDiv),
+              gameStatus = game.status();
+
+          if (gameStatus === 'GAME_OVER') {
+             smiley.addClass('gameover');
+             return;
+          }
+
+          smiley.addClass('pressed');
+          setTimeout(function() {
+             smiley.removeClass('pressed');
+          }, 200);
+       },
+
+       statusBar = function() {
+          return $('<div class="status"><div class="smiley"></div></div>');
        },
 
        render = function() {
@@ -44,7 +64,12 @@ $(function() {
              table.append(tr);
           });
 
+          gameDiv.append(statusBar());
           gameDiv.append(table);
+
+          setTimeout(function() {
+             gameDiv.width($('table', gameDiv).width());
+          });
        },
 
        reRender = function() {
