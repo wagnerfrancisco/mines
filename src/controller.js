@@ -16,7 +16,7 @@ $(function() {
          game.start({
             rows: 20,
             columns: 20,
-            bombs: 50
+            bombs: 100
          });
 
          render();

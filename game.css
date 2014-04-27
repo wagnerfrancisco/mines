@@ -9,37 +9,46 @@
    background-color: #CCC;
    height: 20px;
    width: 20px;
+   font-weight: bold;
 }
 
 #game td.field_1:after {
+   color: blue;
    content: '1';
 }
 
 #game td.field_2:after {
+   color: green;
    content: '2';
 }
 
 #game td.field_3:after {
+   color: red;
    content: '3';
 }
 
 #game td.field_4:after {
+   color: darkblue;
    content: '4';
 }
 
 #game td.field_5:after {
+   color: brown;
    content: '5';
 }
 
 #game td.field_6:after {
+   color: green;
    content: '6';
 }
 
 #game td.field_7:after {
+   color: blue;
    content: '7';
 }
 
 #game td.field_8:after {
+   color: red;
    content: '8';
 }
 
@@ -50,9 +59,10 @@
 }
 
 #game td.visible {
-   font-size: 14px;
+   font-size: 12px;
    text-align: center;
    background-color: #EEE;
+   font-family: Helvetica;
 }
 
 #game .status {
