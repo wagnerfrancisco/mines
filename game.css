@@ -38,3 +38,7 @@
 #game .status .smiley.gameover {
    background-image: url('assets/dead.gif');
 }
+
+#game .status .smiley:active {
+   background-image: url('assets/pressed.gif');
+}

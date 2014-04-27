@@ -5,6 +5,7 @@ $(function() {
 
        initialize = function() {
          gameDiv = $('#game');
+         gameDiv.empty();
 
          if (!gameDiv.length) {
             throw 'game div not found';
@@ -45,7 +46,11 @@ $(function() {
        },
 
        statusBar = function() {
-          return $('<div class="status"><div class="smiley"></div></div>');
+          var statusBar = $('<div class="status"><div class="smiley"></div></div>');
+          statusBar.find('.smiley').click(function() {
+             initialize();
+          });
+          return statusBar;
        },
 
        render = function() {
