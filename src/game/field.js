@@ -40,7 +40,7 @@ mines.field = function(specs) {
       turned = !turned;
       if (that.isBomb()) {
          throw 'BOMB_EXPLODED';
-      }      
+      }
    };
 
    that.value = function() {
