@@ -11,6 +11,44 @@
    width: 20px;
 }
 
+#game td.field_1:after {
+   content: '1';
+}
+
+#game td.field_2:after {
+   content: '2';
+}
+
+#game td.field_3:after {
+   content: '3';
+}
+
+#game td.field_4:after {
+   content: '4';
+}
+
+#game td.field_5:after {
+   content: '5';
+}
+
+#game td.field_6:after {
+   content: '6';
+}
+
+#game td.field_7:after {
+   content: '7';
+}
+
+#game td.field_8:after {
+   content: '8';
+}
+
+#game td.field_B.visible {
+   background-image: url('assets/bomb.png');
+   background-size: 18px 18px;
+   background-repeat: no-repeat;
+}
+
 #game td.visible {
    font-size: 14px;
    text-align: center;

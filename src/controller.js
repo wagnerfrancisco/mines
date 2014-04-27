@@ -65,7 +65,7 @@ $(function() {
              var tr = $('<tr>');
              
              _.each(row, function(column) {
-                var td = $('<td>').text(column == '0' ? ' ' : column);
+                var td = $('<td>').attr('class', 'field_' + column);
                 td.click(fieldClickHandler(column));
                 tr.append(td);
              });
