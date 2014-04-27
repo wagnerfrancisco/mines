@@ -6,7 +6,8 @@ mines.game = function(randomNumbers) {
 
        availableStatus = {
           playing: 'PLAYING',
-          gameOver: 'GAME_OVER'
+          gameOver: 'GAME_OVER',
+          victory: 'VICTORY'
        },
 
        currentStatus,

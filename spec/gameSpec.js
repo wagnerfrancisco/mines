@@ -69,5 +69,9 @@ describe('game', function() {
             g.turnField(indicator);
          }).toThrow('NOT_ALLOWED');
       });
+
+      it('should change status to victory if all the indicators were turned', function() {
+         console.log('g', g);
+      });
    });
 });
