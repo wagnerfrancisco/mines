@@ -71,7 +71,12 @@ describe('game', function() {
       });
 
       it('should change status to victory if all the indicators were turned', function() {
-         console.log('g', g);
+         g.turnField(g.grid[0][0]);
+         g.turnField(g.grid[0][2]);
+         g.turnField(g.grid[1][1]);
+         g.turnField(g.grid[1][2]);
+         
+         expect(g.status()).toBe('VICTORY');
       });
    });
 });

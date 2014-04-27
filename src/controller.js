@@ -31,11 +31,15 @@ $(function() {
        },
 
        updateSmiley = function() {
-          var smiley = $('.smiley', gameDiv),
-              gameStatus = game.status();
+          var gameStatus = game.status(),
+              smiley = $('.smiley', gameDiv),
+              statusToSmiley = {
+                 GAME_OVER: 'gameover',
+                 VICTORY: 'victory'
+              };
 
-          if (gameStatus === 'GAME_OVER') {
-             smiley.addClass('gameover');
+          if (statusToSmiley.hasOwnProperty(gameStatus)) {
+             smiley.addClass(statusToSmiley[gameStatus]);
              return;
           }
 

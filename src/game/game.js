@@ -4,6 +4,8 @@ mines.game = function(randomNumbers) {
 
    var that = {},
 
+       specs,
+
        availableStatus = {
           playing: 'PLAYING',
           gameOver: 'GAME_OVER',
@@ -54,21 +56,38 @@ mines.game = function(randomNumbers) {
           };
        },
 
+       checkVictory = function() {
+          var grid = that.grid,
+              fields = _.flatten(grid),
+              turnedFields = _.reduce(fields, function(memo, field) {
+                 return memo + field.isTurned();
+              }, 0),
+              totalIndicators = specs.rows * specs.columns - specs.bombs;
+
+          if (turnedFields === totalIndicators) {
+             currentStatus = availableStatus.victory;
+          }
+
+          console.log('turnedFields', turnedFields, totalIndicators, currentStatus);
+       },
+
        initialize = function() {
           restrictState(that, 'turnField', availableStatus.playing);
        };
 
-   that.start = function(specs) {
+   that.start = function(_specs) {
+      specs = _specs;
       currentStatus = availableStatus.playing;
-      that.grid = mines.grid(specs);
+      that.grid = mines.grid(_specs);
 
-      insertBombs(specs);
+      insertBombs(_specs);
       calculateMinesIndicators();
    };
 
    that.turnField = function(field) {
       try {
         that.grid.turnField(field);
+        checkVictory();
       } catch(e) {
         if (e === 'BOMB_EXPLODED') {
            currentStatus = availableStatus.gameOver;

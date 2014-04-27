@@ -35,6 +35,10 @@
    background-image: url('assets/shock.gif');
 }
 
+#game .status .smiley.victory {
+   background-image: url('assets/shades.gif');
+}
+
 #game .status .smiley.gameover {
    background-image: url('assets/dead.gif');
 }
