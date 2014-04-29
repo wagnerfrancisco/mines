@@ -6,6 +6,7 @@ describe('field', function() {
       expect(f.isBomb()).toBe(false);
       expect(f.isTurned()).toBe(false);
       expect(f.toString()).toBe('0');
+      expect(f.isFlagged()).toBe(false);
    });
 
    it('should transform a field into a bomb', function() {
@@ -37,6 +38,20 @@ describe('field', function() {
       expect(f.isBomb()).toBe(true);
    });
 
+   it('should flag and unflag field', function() {
+      var f = mines.field({
+         fromString: 'B'
+      });
+
+      f.flag();
+
+      expect(f.isFlagged()).toBe(true);
+
+      f.flag();
+
+      expect(f.isFlagged()).toBe(false);
+   });
+
    it('should increase indicator value', function() {
       var f = mines.field();
       expect(f.value()).toBe(0);
@@ -57,6 +72,27 @@ describe('field', function() {
 
       f.turn();
       expect(f.isTurned()).toBe(true);
+   });
+
+   it('should not be possible to turn a flagged field', function() {
+      var f = mines.field();
+      expect(f.isTurned()).toBe(false);
+
+      f.flag();
+      f.turn();
+      expect(f.isTurned()).toBe(false);
+   });
+
+   it('should not be possible to flag a turned field', function() {
+      var f = mines.field();
+
+      f.turn();
+      expect(f.isTurned()).toBe(true);
+      expect(f.isFlagged()).toBe(false);
+
+      f.flag();
+
+      expect(f.isFlagged()).toBe(false);
    });
 
    it('should throw gameOver when turning a bomb field', function() {

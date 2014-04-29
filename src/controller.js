@@ -7,6 +7,8 @@ $(function() {
          gameDiv = $('#game');
          gameDiv.empty();
 
+         disableContextMenu();
+
          if (!gameDiv.length) {
             throw 'game div not found';
          }
@@ -22,9 +24,19 @@ $(function() {
          render();
        },
 
-       fieldClickHandler = function(field) {
+       disableContextMenu = function() {
+          document.oncontextmenu = function() {
+             return false;
+          };
+       },
+
+       fieldMouseDownHandler = function(field) {
           return function(e) {
-             game.turnField(field);
+             if (e.button === 2) {
+                field.flag();
+             } else {
+                game.turnField(field);   
+             }             
              reRender();
              updateSmiley();
           };
@@ -66,7 +78,7 @@ $(function() {
              
              _.each(row, function(column) {
                 var td = $('<td>').attr('class', 'field_' + column);
-                td.click(fieldClickHandler(column));
+                td.mousedown(fieldMouseDownHandler(column));
                 tr.append(td);
              });
 
@@ -90,7 +102,9 @@ $(function() {
              _.each(tds, function(td, j) {
                 var field = grid[i][j];
 
-                if (field.isTurned()) {
+                if (field.isFlagged()) {
+                   $(td).addClass('flagged');
+                } else if (field.isTurned()) {
                    $(td).addClass('visible');
                 }
              });

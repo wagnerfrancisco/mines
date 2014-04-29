@@ -58,6 +58,13 @@
    background-repeat: no-repeat;
 }
 
+#game td.flagged {
+   background-image: url('assets/flag.png');
+   background-size: 18px 18px;
+   background-repeat: no-repeat;
+   background-color: #EEE;
+}
+
 #game td.visible {
    font-size: 12px;
    text-align: center;

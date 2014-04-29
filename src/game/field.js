@@ -3,6 +3,7 @@ var mines = mines || {};
 mines.field = function(specs) {
    var that = {},
        value = 0,
+       flagged = false,
        turned = false,
        isBomb = false,
 
@@ -37,10 +38,26 @@ mines.field = function(specs) {
    };
 
    that.turn = function() {
+      if (that.isFlagged()) {
+         return;
+      }
+
       turned = true;
       if (that.isBomb()) {
          throw 'BOMB_EXPLODED';
       }
+   };
+
+   that.flag = function() {
+      if (that.isTurned()) {
+         return;
+      }
+      
+      flagged = !flagged;
+   };
+
+   that.isFlagged = function() {
+      return flagged;
    };
 
    that.value = function() {
