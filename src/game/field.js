@@ -52,7 +52,7 @@ mines.field = function(specs) {
       if (that.isTurned()) {
          return;
       }
-      
+
       flagged = !flagged;
    };
 

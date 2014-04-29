@@ -104,7 +104,11 @@ $(function() {
 
                 if (field.isFlagged()) {
                    $(td).addClass('flagged');
-                } else if (field.isTurned()) {
+                } else {
+                   $(td).removeClass('flagged');
+                }
+                
+                if (field.isTurned()) {
                    $(td).addClass('visible');
                 }
              });
