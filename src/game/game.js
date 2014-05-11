@@ -30,18 +30,15 @@ mines.game = function(randomNumbers) {
        },
 
        calculateMinesIndicators = function() {
-          var i, j, row,
-              grid = that.grid;
+          var grid = that.grid;
 
-          for (i = 0; i < grid.length; i++) {
-             row = grid[i];
-
-             for (j = 0; j < row.length; j++) {
-                if (row[j].isBomb()) {
-                    grid.increaseIndicatorsAround(i, j);
-                }
-             }
-          }
+          _.each(grid, function(row, i) {
+             _.each(row, function(column, j) {
+               if (column.isBomb()) {
+                  grid.increaseIndicatorsAround(i, j);
+               }
+             });
+          });
        },
 
        restrictState = function(o, m, status) {
@@ -59,16 +56,14 @@ mines.game = function(randomNumbers) {
        checkVictory = function() {
           var grid = that.grid,
               fields = _.flatten(grid),
-              turnedFields = _.reduce(fields, function(memo, field) {
+              turnedFieldsNum = _.reduce(fields, function(memo, field) {
                  return memo + field.isTurned();
               }, 0),
               totalIndicators = specs.rows * specs.columns - specs.bombs;
 
-          if (turnedFields === totalIndicators) {
+          if (turnedFieldsNum === totalIndicators) {
              currentStatus = availableStatus.victory;
           }
-
-          console.log('turnedFields', turnedFields, totalIndicators, currentStatus);
        },
 
        initialize = function() {
